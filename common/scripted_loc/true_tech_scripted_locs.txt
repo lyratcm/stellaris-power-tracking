@@ -1,0 +1,112 @@
+# You can also do this to use script values in loc:
+defined_text = {
+    name = lyra_true_tech_text
+    value = value:true_tech
+}
+
+defined_text = {
+    name = lyra_true_tradition_text
+    value = value:true_tradition
+}
+
+defined_text = {
+    name = lyra_true_alloys_text
+    value = value:true_alloys
+}
+
+defined_text = {
+    name = lyra_true_pops_text
+    value = value:true_pops
+}
+
+defined_text = {
+    name = output_situation_name
+
+    text = {
+        trigger = {
+            has_situation_flag = tech
+        }
+        localization_key = delta_to_tech
+    }
+	text = {
+        trigger = {
+            has_situation_flag = tradition
+        }
+        localization_key = delta_to_tradition
+    }
+	text = {
+        trigger = {
+            has_situation_flag = alloys
+        }
+        localization_key = delta_to_alloys
+    }
+	text = {
+        trigger = {
+            has_situation_flag = pops
+        }
+        localization_key = delta_to_pops
+    }
+	text = {
+        trigger = {
+            has_situation_flag = capital_owned
+        }
+        localization_key = delta_to_capital_owned
+    }
+    default = actual_tech_chain_title
+}
+
+
+defined_text = {
+    name = output_situation_desc
+
+    text = {
+        trigger = {
+            has_situation_flag = tech
+        }
+        localization_key = delta_to_tech_desc
+    }
+	text = {
+        trigger = {
+            has_situation_flag = tradition
+        }
+        localization_key = delta_to_tradition_desc
+    }
+	text = {
+        trigger = {
+            has_situation_flag = alloys
+        }
+        localization_key = delta_to_alloys_desc
+    }
+	text = {
+        trigger = {
+            has_situation_flag = pops
+        }
+        localization_key = delta_to_pops_desc
+    }
+	text = {
+        trigger = {
+            has_situation_flag = capital_owned
+        }
+        localization_key = delta_to_capital_owned_desc
+    }
+
+    default = actual_tech_chain_title
+}
+
+defined_text = {
+    name = actual_tech_host_chain_desc_type
+
+    text = {
+        trigger = {
+            has_global_flag = power_tracker
+        }
+        localization_key = actual_tech_host_chain_desc
+    }
+	text = {
+        trigger = {
+            has_global_flag = pvp_tracker
+        }
+        localization_key = actual_pvp_host_chain_desc
+    }
+    default = actual_tech_chain_title
+}

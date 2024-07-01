@@ -1,0 +1,22 @@
+on_game_start_country = {
+    events = {
+        lyra_true_tech.1
+    }
+}
+
+on_monthly_pulse_country = {
+    events = {
+        lyra_true_tech.2
+        lyra_true_tech.21
+    }
+}
+
+# Fired whenever a new owner is set for a planet, following a war or through trade
+# This = Planet scope
+# From = Country scope (new owner)
+# FromFrom = Country scope (previous owner, if any)
+on_planet_transfer = {
+	events = {
+		lyra_true_tech.22
+	}
+}

@@ -1,0 +1,33 @@
+true_tech_activate_trackers = {
+    length = 1
+    icon = "GFX_edict_type_time"
+
+    potential = {
+        not = {
+            has_country_flag = true_tech_is_picking_tracker
+        }
+    }
+
+    effect = {
+		if = {
+			limit = {
+				has_global_flag = power_tracker
+			}
+			country_event = {
+				id = lyra_true_tech.10
+			}
+		}
+		else_if = {
+			limit = {
+				has_global_flag = pvp_tracker
+			}
+			country_event = {
+				id = lyra_true_tech.11
+			}
+		}
+    }
+
+    ai_weight = {
+        weight = 0
+    }
+}

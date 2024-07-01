@@ -1,0 +1,50 @@
+﻿l_english:
+####    event chain    ########################################################################
+ actual_tech_chain_title:0 "Actual empire output"
+ #lyra_true_tech_text and other files are defined in true_tech_scripted_locs as a way to use scripted values in locs
+ actual_tech_chain_desc:0 "This shows an empire key productions accounting for empire size/ research speed. \n\n §BResearch output: [owner.lyra_true_tech_text]§! \n §BUnity output: [owner.lyra_true_tradition_text]§! \n §BAlloys output: [owner.lyra_true_alloys_text]§! \n §BTotal pops: [owner.lyra_true_pops_text]§!"
+ actual_tech_host_chain_title:0 "Strongest empires"
+ actual_tech_host_chain_desc:0 "This shows the top 4 empires, top tech, top alloy, top unity, top pops \n\n Research output: \n §B1st [event_target:lyra_true_tech1_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech1_max.GetName] \n §B2nd [event_target:lyra_true_tech2_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech2_max.GetName] \n §B3rd [event_target:lyra_true_tech3_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech3_max.GetName]  \n §B4th [event_target:lyra_true_tech4_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech4_max.GetName]  \n §B5th [event_target:lyra_true_tech5_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech5_max.GetName] \n Unity output: \n §B1st [event_target:lyra_true_tradition1_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition1_max.GetName] \n §B2nd [event_target:lyra_true_tradition2_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition2_max.GetName] \n §B3rd [event_target:lyra_true_tradition3_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition3_max.GetName] \n §B4th [event_target:lyra_true_tradition4_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition4_max.GetName] \n §B5th [event_target:lyra_true_tradition5_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition5_max.GetName] \n Alloy output: \n §B1st [event_target:lyra_true_alloys1_max.lyra_true_alloys_text]§! by the [event_target:lyra_true_alloys1_max.GetName] \n §B2nd [event_target:lyra_true_alloys2_max.lyra_true_alloys_text]§! by the [event_target:lyra_true_alloys2_max.GetName] \n §B3rd [event_target:lyra_true_alloys3_max.lyra_true_alloys_text]§! by the [event_target:lyra_true_alloys3_max.GetName] \n §B4th [event_target:lyra_true_alloys4_max.lyra_true_alloys_text]§! by the [event_target:lyra_true_alloys4_max.GetName]\n §B5th [event_target:lyra_true_alloys5_max.lyra_true_alloys_text]§! by the [event_target:lyra_true_alloys5_max.GetName] \n Pop count: \n §B1st [event_target:lyra_true_pops1_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops1_max.GetName] \n §B2nd [event_target:lyra_true_pops2_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops2_max.GetName] \n §B3rd [event_target:lyra_true_pops3_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops3_max.GetName] \n §B4th [event_target:lyra_true_pops4_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops4_max.GetName]  \n §B5th [event_target:lyra_true_pops5_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops5_max.GetName]"
+
+####    situation    #######################################################################
+ delta_to_tech: "Distance to highest tech"
+ delta_to_tech_type: "Distance to tech leader"
+ delta_to_tech_desc: "Research output: \n §B1st [event_target:lyra_true_tech1_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech1_max.GetName] \n §B2nd [event_target:lyra_true_tech2_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech2_max.GetName] \n §B3rd [event_target:lyra_true_tech3_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech3_max.GetName] \n §B4th [event_target:lyra_true_tech3_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech4_max.GetName] \n §B4th [event_target:lyra_true_tech4_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech4_max.GetName]"
+ delta_to_tradition: "Distance to highest unity output"
+ delta_to_tradition_type: "Distance to unity leader"
+ delta_to_tradition_desc: "Unity output: \n §B1st [event_target:lyra_true_tradition1_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition1_max.GetName] \n §B2nd [event_target:lyra_true_tradition2_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition2_max.GetName] \n §B3rd [event_target:lyra_true_tradition3_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition3_max.GetName] \n §B4th [event_target:lyra_true_tradition4_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition4_max.GetName]\n §B5th [event_target:lyra_true_tradition5_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition5_max.GetName]"
+ delta_to_alloys: "Distance to highest alloys output"
+ delta_to_alloys_type: "Distance to alloy leader"
+ delta_to_alloys_desc: "Alloy output: \n §B1st [event_target:lyra_true_alloys1_max.lyra_true_alloys_text]§! by the [event_target:lyra_true_alloys1_max.GetName] \n §B2nd [event_target:lyra_true_alloys2_max.lyra_true_alloys_text]§! by the [event_target:lyra_true_alloys2_max.GetName] \n §B3rd [event_target:lyra_true_alloys3_max.lyra_true_alloys_text]§! by the [event_target:lyra_true_alloys3_max.GetName] \n §B4th [event_target:lyra_true_alloys4_max.lyra_true_alloys_text]§! by the [event_target:lyra_true_alloys4_max.GetName] \n §B5th [event_target:lyra_true_alloys5_max.lyra_true_alloys_text]§! by the [event_target:lyra_true_alloys5_max.GetName]"
+ delta_to_pops: "Distance to highest number of pops"
+ delta_to_pops_type: "Distance to pop leader"
+ delta_to_pops_desc: "Pop count: \n §B1st [event_target:lyra_true_pops1_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops1_max.GetName] \n §B2nd [event_target:lyra_true_pops2_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops2_max.GetName] \n §B3rd [event_target:lyra_true_pops3_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops3_max.GetName] \n §B4rd [event_target:lyra_true_pops4_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops4_max.GetName] \n §B5rd [event_target:lyra_true_pops5_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops5_max.GetName]"
+
+ omni_to_leader:0 "" 
+ lyra_true_tech.10.title: "Configure delta to leader situations"
+ lyra_true_tech.10.1: "Start situation for distance to tech leader"
+ lyra_true_tech.10.11: "end situation for distance to tech leader"
+ lyra_true_tech.10.2:  "Start situation for distance to unity leader"
+ lyra_true_tech.10.21: "end situation for distance to unity leader"
+ lyra_true_tech.10.3:  "Start situation for distance to alloy leader"
+ lyra_true_tech.10.31: "end situation for distance to alloy leader"
+ lyra_true_tech.10.4:  "Start situation for distance to pop leader"
+ lyra_true_tech.10.41: "end situation for distance to pop leader"
+ lyra_true_tech.10.5: "fix missing actual resource outputs situation logs"
+ lyra_true_tech.10.6: "exit menu"
+ edict_true_tech_activate_trackers: "Delta to production leader situations"
+
+ delta_to_tech_monthly_change_tooltip:0 "REPLACE_ME"
+ delta_to_tradition_monthly_change_tooltip:0 "REPLACE_ME"
+ delta_to_alloys_monthly_change_tooltip:0 "REPLACE_ME"
+ delta_to_pops_monthly_change_tooltip:0 "REPLACE_ME"
+ lyra_true_tech.10.999:0 "Switch tracking to gross output"
+ lyra_true_tech.10.9991:0 "Switch tracking to net output"
+
+
+####    aio locs    #########################################################################################################################
+ delta_to_omni:0 "[this.output_situation_name]"
+ delta_to_omni_tooltip: " $TYPE$ Distance to highest $NAME$ situaiton"
+ delta_to_omni_desc:0 "[this.output_situation_desc]"
+
+ actual_tech_host_chain_desc: [owner.actual_tech_host_chain_desc_type]

@@ -1,0 +1,274 @@
+
+#To use one of them, refer to them elsewhere in script via "value:<value>" e.g. value:example_value
+#IMPORTANT NOTE: Be mindful of performance when using these in triggers that are checked often!
+
+# example_value = {
+# 	base = 10 #default: 0
+
+# 	# List of valid mathematical operations:
+# 	# 	Numerical (modifying by a number):
+# 	# 	- set/weight (both do the same, replaces the current result with this value)
+# 	# 	- add
+# 	# 	- subtract
+# 	# 	- factor/mult/multiply ("multiply" fits the name scheme of the rest better, but the other two were kept for historical reasons)
+# 	# 	- divide
+# 	# 	- modulo
+# 	# 	- round_to (rounds to nearest of that value, e.g. 10.7 round_to 5 gives you 10)
+# 	# 	- max (sets to specified value if currently above it)
+# 	# 	- min (sets to specified value if currently below it)
+# 	# 	- pow (value is multiplied by itself to the power of x; be careful, you can get overflows if you are not careful)
+# 	# 	Simple (do not need a number, but just "yes", e.g. "round = yes")
+# 	# 	- round (sets to nearest full number)
+# 	# 	- ceiling (rounds up)
+# 	# 	- floor (rounds down)
+# 	# 	- abs (multiply by -1 if negative)
+# 	# 	- square (multiply by itself)
+# 	# 	- square_root
+
+# 	#All mathematical operations except weight and factor can be used inline e.g.
+# 	add = 100
+# 	multiply = value:some_other_script_value
+# 	round = yes
+# 	#(Note: weight and factor will instead overwrite the base value - use set, mult or multiply instead)
+
+# 	#They can also be used in modifier = {} fields, which lets you only apply them if triggers are true
+# 	modifier = {
+# 		max = owner.max_example_variable 					#Variable set by set_variable
+# 		owner = { is_variable_set = max_example_variable }	#Only applied if this trigger is true
+# 	}
+# 	# What works for right hand side values of mathematical operations? See events/00_how_to_use_variables for full list.
+
+# 	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
+# 		trigger = count_owned_planet
+# 		trigger_scope = owner 		#Lets you get the result of the trigger on a different scope. Default is "this"
+# 		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
+# 			limit = { num_pops > 10 }
+# 		}
+# 		mode = add 					#Allows all numerical operations
+# 		mult = 5 					#Multiplies the outcome by this. In this example, this means adding 5 for each planet with more than 10 pops
+# 	}
+# }
+
+# Final note: script_values use the same metascript system as scripted_triggers and scripted_effects
+# This means that you can input parameters into them, in a similar fashion as described in scripted_effects/99_advanced_documentation.txt
+# For format for doing so is value:my_value|PARAM1|value1|PARAM2|value2|.
+# Then you can use $PARAM1$ in the script value and it will replace it with value1
+
+true_tech = {
+	add = value:true_research_type|RESOURCE|physics_research|RESEARCH_SPEED|country_physics_tech_research_speed|
+	add = value:true_research_type|RESOURCE|society_research|RESEARCH_SPEED|country_society_tech_research_speed|
+	add = value:true_research_type|RESOURCE|engineering_research|RESEARCH_SPEED|country_engineering_tech_research_speed|
+	mult = value:true_modifier_speed|MODIFIER|all_technology_research_speed|
+}
+
+true_tradition = { # ( 1 - income / expenses ) * 10
+	base = 0
+	modifier = {
+		add = value:true_tradition_revenue
+		has_country_flag = true_tech_revenue
+	}
+	modifier = {
+		add = value:true_tradition_income
+		not = {
+			has_country_flag = true_tech_revenue
+		}
+	}
+	divide = value:true_empire_sprawl|SPRAWL_VALUE|0.002|
+}
+
+true_tradition_revenue = {
+	base = 0
+	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
+		trigger = resource_revenue_compare
+		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
+			resource = unity
+			value = 0
+		}
+		mode = add 					#Allows all numerical operations
+	}
+}
+
+true_tradition_income = {
+	base = 0
+	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
+		trigger = resource_income_compare
+		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
+			resource = unity
+			value = 0
+		}
+		mode = add 					#Allows all numerical operations
+	}
+}
+
+true_alloys = {
+	base = 0
+	modifier = {
+		add = value:true_alloys_revenue
+		has_country_flag = true_tech_revenue
+	}
+	modifier = {
+		add = value:true_alloys_income
+		not = {
+			has_country_flag = true_tech_revenue
+		}
+	}
+}
+
+true_alloys_revenue = {
+	base = 0
+	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
+		#using revenue bc stuff like ships can eat it up but are things that can be remove if needed
+		trigger = resource_revenue_compare
+		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
+			resource = alloys
+			value = 0
+		}
+		mode = add 					#Allows all numerical operations
+	}
+}
+
+true_alloys_income = {
+	base = 0
+	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
+		#using revenue bc stuff like ships can eat it up but are things that can be remove if needed
+		trigger = resource_income_compare
+		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
+			resource = alloys
+			value = 0
+		}
+		mode = add 					#Allows all numerical operations
+	}
+}
+
+true_pops = {
+	base = 0
+	add = trigger:num_pops
+}
+
+true_research_type = { #
+	base = 0
+	modifier = {
+		add = value:true_research_revenue|RESOURCE|$RESOURCE$|
+		has_country_flag = true_tech_revenue
+	}
+	modifier = {
+		add = value:true_research_income|RESOURCE|$RESOURCE$|
+		not = {
+			has_country_flag = true_tech_revenue
+		}
+	}
+	divide = value:true_empire_sprawl|SPRAWL_VALUE|0.001|
+	mult = value:true_modifier_speed|MODIFIER|$RESEARCH_SPEED$|
+}
+
+true_research_revenue = {
+	base = 0
+	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
+		trigger = resource_revenue_compare
+		parameters = {				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
+			resource = $RESOURCE$
+			value = 0
+		}
+		mode = add 					#Allows all numerical operations
+	}
+}
+
+true_research_income = {
+	base = 0
+	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
+		trigger = resource_income_compare
+		parameters = {				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
+			resource = $RESOURCE$
+			value = 0
+		}
+		mode = add 					#Allows all numerical operations
+	}
+}
+
+true_empire_sprawl = { # empire sprawl div by penalty
+	base = 0
+	add = trigger:empire_sprawl_over_cap #add sprawl
+	min = 0 #above can be negative if below 100 size, set to 0 if below as no change
+	mult = $SPRAWL_VALUE$ #reduce to penatly
+	mult = value:true_sprawl_reduction #
+	add = 1
+}
+
+true_sprawl_reduction = {
+	base = 1
+	add = modifier:empire_size_penalty_mult
+}
+
+true_modifier_speed = {
+	add = modifier:$MODIFIER$
+	add = 1
+}
+
+delta_true_tech = {
+	base = 0
+	add = owner.value:delta_base_val|MEASURE_VAL|true_tech|
+	max = 100
+	min = 0
+}
+
+delta_true_tradition = {
+	base = 0
+	add = owner.value:delta_base_val|MEASURE_VAL|true_tradition|
+	max = 100
+	min = 0
+}
+
+delta_true_alloys = {
+	base = 0
+	add = owner.value:delta_base_val|MEASURE_VAL|true_alloys|
+	max = 100
+	min = 0
+}
+
+delta_true_pops = {
+	base = 0
+	add = owner.value:delta_base_val|MEASURE_VAL|true_pops|
+	max = 100
+	min = 0
+}
+
+delta_true_omni = {
+	base = 0
+	modifier = {
+		add = owner.value:delta_base_val|MEASURE_VAL|true_tech|
+		has_situation_flag = tech
+	}
+	modifier = {
+		add = owner.value:delta_base_val|MEASURE_VAL|true_tradition|
+		has_situation_flag = tradition
+	}
+	modifier = {
+		add = owner.value:delta_base_val|MEASURE_VAL|true_alloys|
+		has_situation_flag = alloys
+	}
+	modifier = {
+		add = owner.value:delta_base_val|MEASURE_VAL|true_pops|
+		has_situation_flag = pops
+	}
+	modifier = {
+		add = value:supremacy_capital_count
+		has_situation_flag = capital_owned
+	}
+
+	max = 100
+	min = 0
+}
+
+
+delta_base_val = {
+	base = 0
+	add = owner.value:$MEASURE_VAL$
+	divide = event_target:lyra_$MEASURE_VAL$1_max.value:$MEASURE_VAL$
+	mult = 100
+}
+
+supremacy_capital_count = {
+	base = 100
+	divide = country_count
+	mult = owner.supremacy_capital_count
+}
