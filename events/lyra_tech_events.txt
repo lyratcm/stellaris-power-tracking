@@ -151,6 +151,7 @@ country_event = {
 		ordered_country_true_value = { TRUE_VALUE = true_tradition }
 		ordered_country_true_value = { TRUE_VALUE = true_alloys }
 		ordered_country_true_value = { TRUE_VALUE = true_pops }
+		ordered_country_true_value = { TRUE_VALUE = supremacy_capital_count VARIABLE = yes }
 	}
 
 }

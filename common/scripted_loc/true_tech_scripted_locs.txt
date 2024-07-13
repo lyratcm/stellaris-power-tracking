@@ -100,6 +100,26 @@ defined_text = {
         trigger = {
             has_global_flag = power_tracker
         }
+        localization_key = actual_tech_host_chain_pve_desc
+    }
+	text = {
+        trigger = {
+            has_global_flag = pvp_tracker
+        }
+        localization_key = actual_tech_host_chain_pvp_desc
+    }
+    default = actual_tech_chain_title
+}
+
+
+
+defined_text = {
+    name = highest_tech_host_chain_desc_type
+
+    text = {
+        trigger = {
+            has_global_flag = power_tracker
+        }
         localization_key = actual_tech_host_chain_desc
     }
 	text = {
@@ -107,6 +127,24 @@ defined_text = {
             has_global_flag = pvp_tracker
         }
         localization_key = actual_pvp_host_chain_desc
+    }
+    default = actual_tech_chain_title
+}
+
+defined_text = {
+    name = actual_tech_chain_desc_type
+
+    text = {
+        trigger = {
+            has_global_flag = power_tracker
+        }
+        localization_key = actual_tech_chain_tech_desc
+    }
+	text = {
+        trigger = {
+            has_global_flag = pvp_tracker
+        }
+        localization_key = actual_tech_chain_pvp_desc
     }
     default = actual_tech_chain_title
 }

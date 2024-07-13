@@ -1,69 +1,138 @@
 ordered_country_true_value = {
-    ordered_country = {
-        limit = {
-			or = {
-				#account for player fe's
-				tec_is_default_country = yes
-				is_ascended_empire = yes
-				is_country_type = default
+	[[ !VARIABLE ]
+		ordered_country = {
+			limit = {
+				or = {
+					#account for player fe's
+					tec_is_default_country = yes
+					is_ascended_empire = yes
+					is_country_type = default
+				}
 			}
-        }
-        position = 0
-        order_by = value:$TRUE_VALUE$
-        save_global_event_target_as = lyra_$TRUE_VALUE$1_max
-    }
-    ordered_country = {
-        limit = {
-			or = {
-				#account for player fe's
-				tec_is_default_country = yes
-				is_ascended_empire = yes
-				is_country_type = default
+			position = 0
+			order_by = value:$TRUE_VALUE$
+			save_global_event_target_as = lyra_$TRUE_VALUE$1_max
+		}
+		ordered_country = {
+			limit = {
+				or = {
+					#account for player fe's
+					tec_is_default_country = yes
+					is_ascended_empire = yes
+					is_country_type = default
+				}
 			}
-        }
-        position = 1
-        order_by = value:$TRUE_VALUE$
-        save_global_event_target_as = lyra_$TRUE_VALUE$2_max
-    }
-    ordered_country = {
-        limit = {
-			or = {
-				#account for player fe's
-				tec_is_default_country = yes
-				is_ascended_empire = yes
-				is_country_type = default
+			position = 1
+			order_by = value:$TRUE_VALUE$
+			save_global_event_target_as = lyra_$TRUE_VALUE$2_max
+		}
+		ordered_country = {
+			limit = {
+				or = {
+					#account for player fe's
+					tec_is_default_country = yes
+					is_ascended_empire = yes
+					is_country_type = default
+				}
 			}
-        }
-        position = 2
-        order_by = value:$TRUE_VALUE$
-        save_global_event_target_as = lyra_$TRUE_VALUE$3_max
-    }
-	ordered_country = {
-        limit = {
-			or = {
-				#account for player fe's
-				tec_is_default_country = yes
-				is_ascended_empire = yes
-				is_country_type = default
+			position = 2
+			order_by = value:$TRUE_VALUE$
+			save_global_event_target_as = lyra_$TRUE_VALUE$3_max
+		}
+		ordered_country = {
+			limit = {
+				or = {
+					#account for player fe's
+					tec_is_default_country = yes
+					is_ascended_empire = yes
+					is_country_type = default
+				}
 			}
-        }
-        position = 3
-        order_by = value:$TRUE_VALUE$
-        save_global_event_target_as = lyra_$TRUE_VALUE$4_max
-    }
-	ordered_country = {
-        limit = {
-			or = {
-				#account for player fe's
-				tec_is_default_country = yes
-				is_ascended_empire = yes
-				is_country_type = default
+			position = 3
+			order_by = value:$TRUE_VALUE$
+			save_global_event_target_as = lyra_$TRUE_VALUE$4_max
+		}
+		ordered_country = {
+			limit = {
+				or = {
+					#account for player fe's
+					tec_is_default_country = yes
+					is_ascended_empire = yes
+					is_country_type = default
+				}
 			}
-        }
-        position = 4
-        order_by = value:$TRUE_VALUE$
-        save_global_event_target_as = lyra_$TRUE_VALUE$5_max
-    }
+			position = 4
+			order_by = value:$TRUE_VALUE$
+			save_global_event_target_as = lyra_$TRUE_VALUE$5_max
+		}
+	]
+	[[ VARIABLE ]
+		ordered_country = {
+			limit = {
+				or = {
+					#account for player fe's
+					tec_is_default_country = yes
+					is_ascended_empire = yes
+					is_country_type = default
+				}
+			}
+			position = 0
+			order_by = $TRUE_VALUE$
+			save_global_event_target_as = lyra_$TRUE_VALUE$1_max
+		}
+		ordered_country = {
+			limit = {
+				or = {
+					#account for player fe's
+					tec_is_default_country = yes
+					is_ascended_empire = yes
+					is_country_type = default
+				}
+			}
+			position = 1
+			order_by = $TRUE_VALUE$
+			save_global_event_target_as = lyra_$TRUE_VALUE$2_max
+		}
+		ordered_country = {
+			limit = {
+				or = {
+					#account for player fe's
+					tec_is_default_country = yes
+					is_ascended_empire = yes
+					is_country_type = default
+				}
+			}
+			position = 2
+			order_by = $TRUE_VALUE$
+			save_global_event_target_as = lyra_$TRUE_VALUE$3_max
+		}
+		ordered_country = {
+			limit = {
+				or = {
+					#account for player fe's
+					tec_is_default_country = yes
+					is_ascended_empire = yes
+					is_country_type = default
+				}
+			}
+			position = 3
+			order_by = $TRUE_VALUE$
+			save_global_event_target_as = lyra_$TRUE_VALUE$4_max
+		}
+		ordered_country = {
+			limit = {
+				or = {
+					#account for player fe's
+					tec_is_default_country = yes
+					is_ascended_empire = yes
+					is_country_type = default
+				}
+			}
+			position = 4
+			order_by = $TRUE_VALUE$
+			save_global_event_target_as = lyra_$TRUE_VALUE$5_max
+		}
+	]
 }
 
 set_situation_true_omni = {
