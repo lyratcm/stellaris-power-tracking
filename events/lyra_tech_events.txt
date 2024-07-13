@@ -151,16 +151,16 @@ country_event = {
 			limit = {
 				has_global_flag = power_tracker
 			}
-			ordered_country_true_value = { TRUE_VALUE = true_tech }
-			ordered_country_true_value = { TRUE_VALUE = true_tradition }
-			ordered_country_true_value = { TRUE_VALUE = true_alloys }
-			ordered_country_true_value = { TRUE_VALUE = true_pops }
+			ordered_country_true_value = { TRUE_VALUE = true_tech TYPE = value: }
+			ordered_country_true_value = { TRUE_VALUE = true_tradition TYPE = value: }
+			ordered_country_true_value = { TRUE_VALUE = true_alloys TYPE = value: }
+			ordered_country_true_value = { TRUE_VALUE = true_pops TYPE = value: }
 		}
 		else_if = {
 			limit = {
 				has_global_flag = pvp_tracker
 			}
-			ordered_country_true_value = { TRUE_VALUE = supremacy_capital_count VARIABLE = yes }
+			ordered_country_true_value = { TRUE_VALUE = supremacy_capital_count }
 		}
 	}
 }
