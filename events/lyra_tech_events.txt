@@ -147,13 +147,22 @@ country_event = {
 
 	immediate = {
 		#runs ordered country which looks at all countries and takes the one with the highest (but can be lowest) value of that and then does an effect on that country, TRUE_VALUE replaces the order_by and event target set values
-		ordered_country_true_value = { TRUE_VALUE = true_tech }
-		ordered_country_true_value = { TRUE_VALUE = true_tradition }
-		ordered_country_true_value = { TRUE_VALUE = true_alloys }
-		ordered_country_true_value = { TRUE_VALUE = true_pops }
-		ordered_country_true_value = { TRUE_VALUE = supremacy_capital_count VARIABLE = yes }
+		if = {
+			limit = {
+				has_global_flag = power_tracker
+			}
+			ordered_country_true_value = { TRUE_VALUE = true_tech }
+			ordered_country_true_value = { TRUE_VALUE = true_tradition }
+			ordered_country_true_value = { TRUE_VALUE = true_alloys }
+			ordered_country_true_value = { TRUE_VALUE = true_pops }
+		}
+		else_if = {
+			limit = {
+				has_global_flag = pvp_tracker
+			}
+			ordered_country_true_value = { TRUE_VALUE = supremacy_capital_count VARIABLE = yes }
+		}
 	}
-
 }
 
 
