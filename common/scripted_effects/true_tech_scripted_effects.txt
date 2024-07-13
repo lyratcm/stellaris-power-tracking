@@ -47,7 +47,7 @@ ordered_country_true_value = {
 				is_country_type = default
 			}
         }
-        position = 2
+        position = 3
         order_by = value:$TRUE_VALUE$
         save_global_event_target_as = lyra_$TRUE_VALUE$4_max
     }
@@ -60,7 +60,7 @@ ordered_country_true_value = {
 				is_country_type = default
 			}
         }
-        position = 2
+        position = 4
         order_by = value:$TRUE_VALUE$
         save_global_event_target_as = lyra_$TRUE_VALUE$5_max
     }

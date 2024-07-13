@@ -328,7 +328,7 @@ country_event = {
 	after = {
 		remove_country_flag = true_tech_is_picking_tracker
 	}
-	#add tech delta
+	#add capital delta
 	option = {
 		name = lyra_true_tech.11.1
 		trigger = { nand = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = capital_owned } } }
@@ -342,7 +342,7 @@ country_event = {
 		}
 
 	}
-	#remove tech delta
+	#remove capital delta
 	option = {
 		name = lyra_true_tech.11.11
 		trigger = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = capital_owned } }
