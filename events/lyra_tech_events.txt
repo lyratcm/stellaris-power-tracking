@@ -56,6 +56,27 @@ country_event = {
 
 	after = {
 		set_global_flag = true_tech_type_picked
+		every_country = {
+			limit = {
+				is_ai = no
+			}
+			if = {
+				limit = {
+					has_global_flag = power_tracker
+				}
+				country_event = {
+					id = lyra_true_tech.10
+				}
+			}
+			else_if = {
+				limit = {
+					has_global_flag = pvp_tracker
+				}
+				country_event = {
+					id = lyra_true_tech.11
+				}
+			}
+		}
 	}
 	#add tech delta
 	option = {
@@ -124,6 +145,7 @@ country_event = {
 			limit = { not = { has_event_chain = actual_tech_host_chain } }
 			begin_event_chain = { event_chain = "actual_tech_host_chain" target = owner }
 		}
+
 	}
 }
 
@@ -156,11 +178,13 @@ country_event = {
 			ordered_country_true_value = { TRUE_VALUE = true_alloys TYPE = value: }
 			ordered_country_true_value = { TRUE_VALUE = true_pops TYPE = value: }
 		}
+		#  not longer needed but for a pvp attempts
 		else_if = {
 			limit = {
 				has_global_flag = pvp_tracker
 			}
-			ordered_country_true_value = { TRUE_VALUE = supremacy_capital_count }
+			# no type bc its a variable and doesn't need its type defined
+			ordered_country_true_value = { TRUE_VALUE = supremacy_capital_count TYPE = "" }
 		}
 	}
 }
