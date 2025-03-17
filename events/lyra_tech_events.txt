@@ -44,6 +44,14 @@ country_event = {
 		}
 		else = {
 			set_global_flag = power_tracker
+			every_country = {
+				limit = {
+					is_ai = no
+				}
+				country_event = {
+					id = lyra_true_tech.10
+				}
+			}
 		}
 	}
 }

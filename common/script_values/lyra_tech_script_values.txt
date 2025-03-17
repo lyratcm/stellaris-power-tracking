@@ -5,25 +5,25 @@
 # example_value = {
 # 	base = 10 #default: 0
 
-# 	# List of valid mathematical operations:
-# 	# 	Numerical (modifying by a number):
-# 	# 	- set/weight (both do the same, replaces the current result with this value)
-# 	# 	- add
-# 	# 	- subtract
-# 	# 	- factor/mult/multiply ("multiply" fits the name scheme of the rest better, but the other two were kept for historical reasons)
-# 	# 	- divide
-# 	# 	- modulo
-# 	# 	- round_to (rounds to nearest of that value, e.g. 10.7 round_to 5 gives you 10)
-# 	# 	- max (sets to specified value if currently above it)
-# 	# 	- min (sets to specified value if currently below it)
-# 	# 	- pow (value is multiplied by itself to the power of x; be careful, you can get overflows if you are not careful)
-# 	# 	Simple (do not need a number, but just "yes", e.g. "round = yes")
-# 	# 	- round (sets to nearest full number)
-# 	# 	- ceiling (rounds up)
-# 	# 	- floor (rounds down)
-# 	# 	- abs (multiply by -1 if negative)
-# 	# 	- square (multiply by itself)
-# 	# 	- square_root
+	# List of valid mathematical operations:
+	# 	Numerical (modifying by a number):
+	# 	- set/weight (both do the same, replaces the current result with this value)
+	# 	- add
+	# 	- subtract
+	# 	- factor/mult/multiply ("multiply" fits the name scheme of the rest better, but the other two were kept for historical reasons)
+	# 	- divide
+	# 	- modulo
+	# 	- round_to (rounds to nearest of that value, e.g. 10.7 round_to 5 gives you 10)
+	# 	- max (sets to specified value if currently above it)
+	# 	- min (sets to specified value if currently below it)
+	# 	- pow (value is multiplied by itself to the power of x; be careful, you can get overflows if you are not careful)
+	# 	Simple (do not need a number, but just "yes", e.g. "round = yes")
+	# 	- round (sets to nearest full number)
+	# 	- ceiling (rounds up)
+	# 	- floor (rounds down)
+	# 	- abs (multiply by -1 if negative)
+	# 	- square (multiply by itself)
+	# 	- square_root
 
 # 	#All mathematical operations except weight and factor can be used inline e.g.
 # 	add = 100
@@ -64,11 +64,11 @@ true_tech = {
 true_tradition = { # ( 1 - income / expenses ) * 10
 	base = 0
 	modifier = {
-		add = value:true_tradition_revenue
+		add = value:true_tradition_produced|TYPE|revenue|
 		has_country_flag = true_tech_revenue
 	}
 	modifier = {
-		add = value:true_tradition_income
+		add = value:true_tradition_produced|TYPE|income|
 		not = {
 			has_country_flag = true_tech_revenue
 		}
@@ -76,22 +76,10 @@ true_tradition = { # ( 1 - income / expenses ) * 10
 	divide = value:true_empire_sprawl|SPRAWL_VALUE|0.002|
 }
 
-true_tradition_revenue = {
+true_tradition_produced = {
 	base = 0
 	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
-		trigger = resource_revenue_compare
-		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
-			resource = unity
-			value = 0
-		}
-		mode = add 					#Allows all numerical operations
-	}
-}
-
-true_tradition_income = {
-	base = 0
-	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
-		trigger = resource_income_compare
+		trigger = resource_$TYPE$_compare
 		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
 			resource = unity
 			value = 0
@@ -103,35 +91,22 @@ true_tradition_income = {
 true_alloys = {
 	base = 0
 	modifier = {
-		add = value:true_alloys_revenue
+		add = value:true_alloys_produced|TYPE|revenue|
 		has_country_flag = true_tech_revenue
 	}
 	modifier = {
-		add = value:true_alloys_income
+		add = value:true_alloys_produced|TYPE|income|
 		not = {
 			has_country_flag = true_tech_revenue
 		}
 	}
 }
 
-true_alloys_revenue = {
+true_alloys_produced = {
 	base = 0
 	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
 		#using revenue bc stuff like ships can eat it up but are things that can be remove if needed
-		trigger = resource_revenue_compare
-		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
-			resource = alloys
-			value = 0
-		}
-		mode = add 					#Allows all numerical operations
-	}
-}
-
-true_alloys_income = {
-	base = 0
-	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
-		#using revenue bc stuff like ships can eat it up but are things that can be remove if needed
-		trigger = resource_income_compare
+		trigger = resource_$TYPE$_compare
 		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
 			resource = alloys
 			value = 0
@@ -148,11 +123,11 @@ true_pops = {
 true_research_type = { #
 	base = 0
 	modifier = {
-		add = value:true_research_revenue|RESOURCE|$RESOURCE$|
+		add = value:true_research_produced|RESOURCE|$RESOURCE$|TYPE|revenue|
 		has_country_flag = true_tech_revenue
 	}
 	modifier = {
-		add = value:true_research_income|RESOURCE|$RESOURCE$|
+		add = value:true_research_produced|RESOURCE|$RESOURCE$|TYPE|income|
 		not = {
 			has_country_flag = true_tech_revenue
 		}
@@ -161,22 +136,10 @@ true_research_type = { #
 	mult = value:true_modifier_speed|MODIFIER|$RESEARCH_SPEED$|
 }
 
-true_research_revenue = {
+true_research_produced = {
 	base = 0
 	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
-		trigger = resource_revenue_compare
-		parameters = {				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
-			resource = $RESOURCE$
-			value = 0
-		}
-		mode = add 					#Allows all numerical operations
-	}
-}
-
-true_research_income = {
-	base = 0
-	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
-		trigger = resource_income_compare
+		trigger = resource_$TYPE$_compare
 		parameters = {				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
 			resource = $RESOURCE$
 			value = 0
