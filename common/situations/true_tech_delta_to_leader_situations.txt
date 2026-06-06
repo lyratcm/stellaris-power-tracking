@@ -1,3 +1,6 @@
+#base upkeep all use inline math so will scale if they are using a multiplier of this
+@spt_ahead_upkeep = 25
+
 delta_to_omni = {
     picture = GFX_evt_arctic
     complete_icon_frame = GFX_situation_outcome_frame_blue
@@ -12,19 +15,115 @@ delta_to_omni = {
             custom_tooltip = stage_unknown_effects
         }
     }
+    approach = {
+        name = spt_default
+        icon = GFX_situation_approach_balance_sheet
+        icon_background = GFX_situation_approach_bg_green
+        default = yes
+        resources = {
+            category = spt_top_upkeep
+            # spt_ahead_upkeep is 25
+            ######################################### true pops ###################################################################
+            upkeep = {
+                trigger = { owner = { country_uses_food = yes is_lithoid = no } has_situation_flag = true_pops has_global_flag = spt_ahead_upkeep }
+                food = @[ spt_ahead_upkeep * 9 ]
+                multiplier = spt_upkeep
+            }
+            upkeep = {
+                trigger = { owner = { is_lithoid = yes country_uses_food = yes } has_situation_flag = true_pops has_global_flag = spt_ahead_upkeep }
+                minerals = @[ spt_ahead_upkeep * 9 ]
+                multiplier = spt_upkeep
+            }
+            upkeep = {
+                trigger = { owner = {  country_uses_food = no } has_situation_flag = true_pops has_global_flag = spt_ahead_upkeep }
+                energy = @[ spt_ahead_upkeep * 9 ]
+                multiplier = spt_upkeep
+            }
+            ######################################### true unity ###################################################################
+            upkeep = {
+                trigger = { owner = { country_uses_consumer_goods = yes is_hive_empire = no } has_situation_flag = true_tradition has_global_flag = spt_ahead_upkeep }
+                consumer_goods = @[ spt_ahead_upkeep * 1 ]
+                multiplier = spt_upkeep
+            }
+            upkeep = {
+                trigger = { owner = { is_hive_empire = yes is_lithoid = no } has_situation_flag = true_tradition has_global_flag = spt_ahead_upkeep }
+                food = @[ spt_ahead_upkeep * 1.5 ]
+                energy = @[ spt_ahead_upkeep * 1.5 ]
+                multiplier = spt_upkeep
+            }
+            upkeep = {
+                trigger = { owner = { is_hive_empire = yes is_lithoid = yes} has_situation_flag = true_tradition has_global_flag = spt_ahead_upkeep }
+                minerals = @[ spt_ahead_upkeep * 1.5 ]
+                energy = @[ spt_ahead_upkeep * 1.5 ]
+                multiplier = spt_upkeep
+            }
+            upkeep = {
+                trigger = { owner = { is_hive_empire = no country_uses_consumer_goods = no } has_situation_flag = true_tradition has_global_flag = spt_ahead_upkeep }
+                energy = @[ spt_ahead_upkeep * 3 ]
+                multiplier = spt_upkeep
+            }
+            ######################################### true alloys ###################################################################
+            upkeep = {
+                trigger = { owner = { is_catalytic_empire = no country_uses_bio_ships = no } has_situation_flag = true_alloys has_global_flag = spt_ahead_upkeep }
+                minerals = @[ spt_ahead_upkeep * 3 ]
+                multiplier = spt_upkeep
+            }
+            # upkeep = {
+            #     trigger = { owner = { is_catalytic_empire = no country_uses_bio_ships = no } has_situation_flag = true_alloys has_global_flag = spt_ahead_upkeep }
+            #     food = @[ spt_ahead_upkeep * 4.5 ]
+            #     multiplier = spt_upkeep
+            # }
+            upkeep = {
+                trigger = { owner = { is_catalytic_empire = no country_uses_bio_ships = yes } has_situation_flag = true_alloys has_global_flag = spt_ahead_upkeep }
+                minerals = @[ spt_ahead_upkeep * 1.5 ]
+                food = @[ spt_ahead_upkeep * 5.25 ]
+                multiplier = spt_upkeep
+            }
+            upkeep = {
+                trigger = { owner = { is_catalytic_empire = yes country_uses_bio_ships = no } has_situation_flag = true_alloys has_global_flag = spt_ahead_upkeep }
+                food = @[ spt_ahead_upkeep * 2.25]
+                food = @[ spt_ahead_upkeep * 5.25 ]
+                multiplier = spt_upkeep
+            }
+            upkeep = {
+                trigger = { owner = { is_catalytic_empire = yes country_uses_bio_ships = yes } has_situation_flag = true_alloys has_global_flag = spt_ahead_upkeep }
+                minerals = @[ spt_ahead_upkeep * 1.5 ]
+                food = @[ spt_ahead_upkeep * 2.25 ]
+                multiplier = spt_upkeep
+            }
+            ######################################### true research ###################################################################
+            upkeep = {
+                trigger = { owner = { is_gestalt = no is_individual_machine = no is_hive_empire = no } has_situation_flag = true_tech has_global_flag = spt_ahead_upkeep }
+                consumer_goods = @[ spt_ahead_upkeep * 1.5 ]
+                multiplier = spt_upkeep
+            }
+            upkeep = {
+                trigger = { owner = { is_hive_empire = yes } has_situation_flag = true_tech has_global_flag = spt_ahead_upkeep }
+                minerals = @[ spt_ahead_upkeep * 3 ]
+                multiplier = spt_upkeep
+            }
+            upkeep = {
+                trigger = { owner = { or = { is_individual_machine = yes is_gestalt = yes } is_hive_empire = no } has_situation_flag = true_tech has_global_flag = spt_ahead_upkeep }
+                energy = @[ spt_ahead_upkeep * 3 ]
+                multiplier = spt_upkeep
+            }
+        }
+    }
+
     monthly_progress = {
         base = 0
         modifier = {
             add = value:delta_true_omni
-            desc = situation_snow_very_hostile_tt
+            desc = delta_to_tech_score
         }
         modifier = {
             subtract = trigger:situation_progress
-            desc = situation_snow_very_hostile_tt
+            desc = delta_to_tech_progress
         }
     }
-    on_progress_complete = {			#Effects when Situation's progress has reached completion, You should always call destroy_situation = this from here or from an event fired by here
-		destroy_situation = this
-		owner = { start_situation = { type = delta_to_omni } set_situation_true_omni = { TYPE = tech } }
-    }
+
+    # on_progress_complete = {			#Effects when Situation's progress has reached completion, You should always call destroy_situation = this from here or from an event fired by here
+	# 	destroy_situation = this
+	# 	owner = { start_situation = { type = delta_to_omni } set_situation_true_omni = { TYPE = tech } }
+    # }
 }

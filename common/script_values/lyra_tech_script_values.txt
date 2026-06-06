@@ -42,7 +42,7 @@
 # 		trigger = count_owned_planet
 # 		trigger_scope = owner 		#Lets you get the result of the trigger on a different scope. Default is "this"
 # 		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
-# 			limit = { num_pops > 10 }
+# 			limit = { pop_amounts > 10 }
 # 		}
 # 		mode = add 					#Allows all numerical operations
 # 		mult = 5 					#Multiplies the outcome by this. In this example, this means adding 5 for each planet with more than 10 pops
@@ -117,7 +117,7 @@ true_alloys_produced = {
 
 true_pops = {
 	base = 0
-	add = trigger:num_pops
+	add = trigger:pop_amount
 }
 
 true_research_type = { #
@@ -183,9 +183,26 @@ delta_true_tradition = {
 
 delta_true_alloys = {
 	base = 0
-	add = owner.value:delta_base_val|MEASURE_VAL|true_alloys|
+	modifier = {
+		country_uses_bio_ships = no
+		add = owner.value:delta_base_val|MEASURE_VAL|true_alloys|
+	}
+	modifier = {
+		country_uses_bio_ships = yes
+		add = value:delta_true_alloys_bio_sub|MEASURE_VAL|true_alloys|MULT|0.5|
+	}
+	modifier = {
+		country_uses_bio_ships = yes
+		add = value:delta_true_alloys_bio_sub|MEASURE_VAL|true_food|MULT|@halved_alloy_to_food_cost_ratio|
+	}
 	max = 100
 	min = 0
+}
+
+delta_true_alloys_bio_sub = {
+	base = 0
+	add = owner.value:delta_base_val|MEASURE_VAL|$MEASURE_VAL$|
+	mult = $MULT$
 }
 
 delta_true_pops = {
@@ -199,23 +216,23 @@ delta_true_omni = {
 	base = 0
 	modifier = {
 		add = owner.value:delta_base_val|MEASURE_VAL|true_tech|
-		has_situation_flag = tech
+		has_situation_flag = true_tech
 	}
 	modifier = {
 		add = owner.value:delta_base_val|MEASURE_VAL|true_tradition|
-		has_situation_flag = tradition
+		has_situation_flag = true_tradition
 	}
 	modifier = {
 		add = owner.value:delta_base_val|MEASURE_VAL|true_alloys|
-		has_situation_flag = alloys
+		has_situation_flag = true_alloys
 	}
 	modifier = {
 		add = owner.value:delta_base_val|MEASURE_VAL|true_pops|
-		has_situation_flag = pops
+		has_situation_flag = true_pops
 	}
 	modifier = {
 		add = value:supremacy_capital_count
-		has_situation_flag = capital_owned
+		has_situation_flag = supremacy_capital_count
 	}
 
 	max = 100
@@ -234,4 +251,31 @@ supremacy_capital_count = {
 	base = 100
 	divide = country_count
 	mult = owner.supremacy_capital_count
+}
+
+true_food = {
+	base = 0
+	modifier = {
+		add = value:true_food_produced|TYPE|revenue|
+		has_country_flag = true_tech_revenue
+	}
+	modifier = {
+		add = value:true_food_produced|TYPE|income|
+		not = {
+			has_country_flag = true_tech_revenue
+		}
+	}
+}
+
+true_food_produced = {
+	base = 0
+	complex_trigger_modifier = { 	#This lets you get the value of a trigger that you can't use in one-liners because it uses {}
+		#using revenue bc stuff like ships can eat it up but are things that can be remove if needed
+		trigger = resource_$TYPE$_compare
+		parameters = { 				#Stick any further information necessary in here, like you'd do within the {} of the trigger normally
+			resource = food
+			value = 0
+		}
+		mode = add 					#Allows all numerical operations
+	}
 }

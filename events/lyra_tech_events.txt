@@ -1,31 +1,50 @@
 namespace = lyra_true_tech
+
 country_event = {
 	id = lyra_true_tech.1
-	hide_window = yes
+	is_triggered_only = yes
 	fire_only_once = yes
-	trigger = {
-		is_ai = no
-		or = {
-			and = {
-				#if lyra is absent pick a host
-				not = { has_global_flag = host_picked }
-				any_country = {
-					not = { has_country_flag = is_lyra }
+	hide_window = yes
+
+	immediate = {
+		# will only set/iterate when the host hasn't been pick either from this effect or from another mod
+        every_country = {
+            limit = {
+                not = {
+                    has_global_flag = host_picked
+                }
+            }
+			if = {
+				limit = {
+					any_country = {
+						not = { has_country_flag = is_lyra }
+					}
+				}
+				set_country_flag = is_host
+			}
+			else = {
+				every_country = {
+					limit = {
+						has_country_flag = is_lyra
+					}
+					set_country_flag = is_host
+					log = "Lyra is //[this.GetName]"
 				}
 			}
-			and = {
-				#if she is use her country
-				not = { has_global_flag = host_picked }
-				has_country_flag = is_lyra
-			}
+            set_global_flag = host_picked
+        }
+		country_event = {
+			id = lyra_true_tech.101
 		}
 	}
+}
+
+country_event = {
+	id = lyra_true_tech.101
+	hide_window = yes
+	is_triggered_only = yes
+
 	immediate = {
-		if = {
-			limit = { not = { has_country_flag = is_lyra } }
-			set_country_flag = is_host
-		}
-		set_global_flag = host_picked
 		every_country = {
 			begin_event_chain = { event_chain = "actual_tech_chain" target = owner }
 			begin_event_chain = { event_chain = "actual_tech_host_chain" target = owner }
@@ -34,6 +53,7 @@ country_event = {
 		country_event = {
 			id = lyra_true_tech.21
 		}
+		set_global_flag = spt_ahead_upkeep
 		if = {
 			limit = {
 				megacorp_metamod_enable = no
@@ -57,7 +77,7 @@ country_event = {
 }
 
 country_event = {
-	id = lyra_true_tech.101
+	id = lyra_true_tech.102
 	hide_window = no
 	is_triggered_only = yes
 	title = lyra_true_tech.101.title
@@ -176,6 +196,37 @@ country_event = {
 	}
 
 	immediate = {
+		every_country = {
+			limit = {
+				or = {
+					# just a load of checks for being a normal empire
+					tec_is_default_country = yes
+					is_ascended_empire = yes
+					is_regular_empire = yes
+					is_country_type = default
+					merg_is_standard_empire = yes
+					is_country_type = ds_nomads
+				}
+				nor = {
+					#no fe/ae
+					is_country_type = fallen_empire
+					is_country_type = awakened_fallen_empire
+				}
+			}
+			every_situation = {
+				limit = {
+					is_situation_type = delta_to_omni
+				}
+				switch = {
+					trigger = has_situation_flag
+					tech = { set_situation_flag = true_tech }
+					tradition = { set_situation_flag = true_tradition }
+					alloys = { set_situation_flag = true_alloys }
+					pops = { set_situation_flag = true_pops }
+					capital_owned = { set_situation_flag = supremacy_capital_count }
+				}
+			}
+		}
 		#runs ordered country which looks at all countries and takes the one with the highest (but can be lowest) value of that and then does an effect on that country, TRUE_VALUE replaces the order_by and event target set values
 		if = {
 			limit = {
@@ -236,16 +287,56 @@ country_event = {
 	after = {
 		remove_country_flag = true_tech_is_picking_tracker
 	}
+
+	#add all delta
+	option = {
+		name = lyra_true_tech.10.0
+		trigger = {
+			nand = {
+				has_country_flag = true_tech
+				has_country_flag = true_tradition
+				has_country_flag = true_alloys
+				has_country_flag = true_pops
+			}
+		}
+		# custom_tooltip_with_params = {
+		# 	description = delta_to_omni_tooltip
+		# 	description_parameters = { NAME = tech TYPE = Enable }
+		# }
+		set_situation_true_omni = { TYPE = true_tech }
+		set_situation_true_omni = { TYPE = true_tradition }
+		set_situation_true_omni = { TYPE = true_alloys }
+		set_situation_true_omni = { TYPE = true_pops }
+		country_event = { id = lyra_true_tech.10 }
+	}
+	#remove all delta
+	option = {
+		name = lyra_true_tech.10.01
+		trigger = {
+			or = {
+				has_country_flag = true_tech
+				has_country_flag = true_tradition
+				has_country_flag = true_alloys
+				has_country_flag = true_pops
+			}
+		}
+		clear_situation_true_omni = { TYPE = true_tech }
+		clear_situation_true_omni = { TYPE = true_tradition }
+		clear_situation_true_omni = { TYPE = true_alloys }
+		clear_situation_true_omni = { TYPE = true_pops }
+		country_event = { id = lyra_true_tech.10 }
+	}
+
 	#add tech delta
 	option = {
 		name = lyra_true_tech.10.1
-		trigger = { nand = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = tech } } }
+		trigger = { nand = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = true_tech } } }
 		hidden_effect = {
 			custom_tooltip_with_params = {
 				description = delta_to_omni_tooltip
 				description_parameters = { NAME = tech TYPE = Enable }
 			}
-			set_situation_true_omni = { TYPE = tech }
+			set_situation_true_omni = { TYPE = true_tech }
 			country_event = { id = lyra_true_tech.10 }			
 		}
 
@@ -253,91 +344,92 @@ country_event = {
 	#remove tech delta
 	option = {
 		name = lyra_true_tech.10.11
-		trigger = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = tech } }
+		trigger = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = true_tech } }
 		hidden_effect = {
 			custom_tooltip_with_params = {
 				description = delta_to_omni_tooltip
 				description_parameters = { NAME = tech TYPE = Disable }
 			}
-			clear_situation_true_omni = { TYPE = tech }
+			clear_situation_true_omni = { TYPE = true_tech }
 			country_event = { id = lyra_true_tech.10 }
 		}
 	}
+
 	#add tradition delta
 	option = {
 		name = lyra_true_tech.10.2
-		trigger = { nand = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = tradition } } }
+		trigger = { nand = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = true_tradition } } }
 		hidden_effect = {
 			custom_tooltip_with_params = {
 				description = delta_to_omni_tooltip
 				description_parameters = { NAME = tradition TYPE = Enable }
 			}
-			set_situation_true_omni = { TYPE = tradition }
+			set_situation_true_omni = { TYPE = true_tradition }
 			country_event = { id = lyra_true_tech.10 }
 		}
 	}
 	#remove tradition delta
 	option = {
 		name = lyra_true_tech.10.21
-		trigger = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = tradition } }
+		trigger = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = true_tradition } }
 		hidden_effect = {
 			custom_tooltip_with_params = {
 				description = delta_to_omni_tooltip
 				description_parameters = { NAME = tradition TYPE = Disable }
 			}
-			clear_situation_true_omni = { TYPE = tradition }
+			clear_situation_true_omni = { TYPE = true_tradition }
 			country_event = { id = lyra_true_tech.10 }
 		}
 	}
 	#add alloys delta
 	option = {
 		name = lyra_true_tech.10.3
-		trigger = { nand = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = alloys } } }
+		trigger = { nand = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = true_alloys } } }
 		hidden_effect = {
 			custom_tooltip_with_params = {
 				description = delta_to_omni_tooltip
 				description_parameters = { NAME = alloys TYPE = Enable }
 			}
-			set_situation_true_omni = { TYPE = alloys }
+			set_situation_true_omni = { TYPE = true_alloys }
 			country_event = { id = lyra_true_tech.10 }
 		}
 	}
 	#remove alloys delta
 	option = {
 		name = lyra_true_tech.10.31
-		trigger = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = alloys } }
+		trigger = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = true_alloys } }
 		hidden_effect = {
 			custom_tooltip_with_params = {
 				description = delta_to_omni_tooltip
 				description_parameters = { NAME = alloys TYPE = Disable }
 			}
-			clear_situation_true_omni = { TYPE = alloys }
+			clear_situation_true_omni = { TYPE = true_alloys }
 			country_event = { id = lyra_true_tech.10 }
 		}
 	}
 	#add pops delta
 	option = {
 		name = lyra_true_tech.10.4
-		trigger = { nand = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = pops } } }
+		trigger = { nand = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = true_pops } } }
 		hidden_effect = {
 			custom_tooltip_with_params = {
 				description = delta_to_omni_tooltip
 				description_parameters = { NAME = pops TYPE = Enable }
 			}
-			set_situation_true_omni = { TYPE = pops }
+			set_situation_true_omni = { TYPE = true_pops }
 			country_event = { id = lyra_true_tech.10 }
 		}
 	}
 	#remove pops delta
 	option = {
 		name = lyra_true_tech.10.41
-		trigger = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = pops } }
+		trigger = { any_situation = { is_situation_type = delta_to_omni has_situation_flag = true_pops } }
 		hidden_effect = {
 			custom_tooltip_with_params = {
 				description = delta_to_omni_tooltip
 				description_parameters = { NAME = pops TYPE = Disable }
 			}
-			clear_situation_true_omni = { TYPE = pops }
+			clear_situation_true_omni = { TYPE = true_pops }
 			country_event = { id = lyra_true_tech.10 }
 		}
 	}
@@ -353,6 +445,20 @@ country_event = {
 		name = lyra_true_tech.10.9991
 		trigger = { has_country_flag = true_tech_revenue }
 		remove_country_flag = true_tech_revenue
+		country_event = { id = lyra_true_tech.10 }
+	}
+	#use upkeep for being ahead
+	option = {
+		name = lyra_true_tech.10.9999
+		trigger = { not = { has_global_flag = spt_ahead_upkeep } has_country_flag = is_host }
+		set_global_flag = spt_ahead_upkeep
+		country_event = { id = lyra_true_tech.10 }
+	}
+    #remove upkeep for being ahead
+	option = {
+		name = lyra_true_tech.10.99991
+		trigger = { has_global_flag = spt_ahead_upkeep has_country_flag = is_host }
+		remove_global_flag = spt_ahead_upkeep
 		country_event = { id = lyra_true_tech.10 }
 	}
 	#close menu
@@ -379,7 +485,7 @@ country_event = {
 				description = delta_to_omni_tooltip
 				description_parameters = { NAME = capital_owned TYPE = Enable }
 			}
-			set_situation_true_omni = { TYPE = capital_owned }
+			set_situation_true_omni = { TYPE = supremacy_capital_count }
 			country_event = { id = lyra_true_tech.11 }			
 		}
 
@@ -393,7 +499,7 @@ country_event = {
 				description = delta_to_omni_tooltip
 				description_parameters = { NAME = capital_owned TYPE = Disable }
 			}
-			clear_situation_true_omni = { TYPE = capital_owned }
+			clear_situation_true_omni = { TYPE = supremacy_capital_count }
 			country_event = { id = lyra_true_tech.11 }
 		}
 	}

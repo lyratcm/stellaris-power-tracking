@@ -20,35 +20,40 @@ defined_text = {
 }
 
 defined_text = {
+    name = lyra_supremacy_capital_count_text
+    value = owner.supremacy_capital_count
+}
+
+defined_text = {
     name = output_situation_name
 
     text = {
         trigger = {
-            has_situation_flag = tech
+            has_situation_flag = true_tech
         }
         localization_key = delta_to_tech
     }
 	text = {
         trigger = {
-            has_situation_flag = tradition
+            has_situation_flag = true_tradition
         }
         localization_key = delta_to_tradition
     }
 	text = {
         trigger = {
-            has_situation_flag = alloys
+            has_situation_flag = true_alloys
         }
         localization_key = delta_to_alloys
     }
 	text = {
         trigger = {
-            has_situation_flag = pops
+            has_situation_flag = true_pops
         }
         localization_key = delta_to_pops
     }
 	text = {
         trigger = {
-            has_situation_flag = capital_owned
+            has_situation_flag = true_capital_owned
         }
         localization_key = delta_to_capital_owned
     }
@@ -61,33 +66,33 @@ defined_text = {
 
     text = {
         trigger = {
-            has_situation_flag = tech
+            has_situation_flag = true_tech
         }
         localization_key = delta_to_tech_desc
     }
 	text = {
         trigger = {
-            has_situation_flag = tradition
+            has_situation_flag = true_tradition
         }
         localization_key = delta_to_tradition_desc
     }
 	text = {
         trigger = {
-            has_situation_flag = alloys
+            has_situation_flag = true_alloys
         }
         localization_key = delta_to_alloys_desc
     }
 	text = {
         trigger = {
-            has_situation_flag = pops
+            has_situation_flag = true_pops
         }
         localization_key = delta_to_pops_desc
     }
 	text = {
         trigger = {
-            has_situation_flag = capital_owned
+            has_situation_flag = supremacy_capital_count
         }
-        localization_key = delta_to_capital_owned_desc
+        localization_key = delta_to_capital_desc
     }
 
     default = actual_tech_chain_title

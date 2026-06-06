@@ -3,5 +3,5 @@ tags={
 	"Utilities"
 }
 name="stellaris power tracking"
-supported_version="v3.12.5"
+supported_version="v4.0.*"
 remote_file_id="3211615980"

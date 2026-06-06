@@ -1,0 +1,13 @@
+tec_is_default_country = {
+    always = no
+}
+is_ascended_empire = {
+    always = no
+}
+
+merg_is_standard_empire = {
+    always = no
+}
+megacorp_metamod_enable = {
+    always = no
+}

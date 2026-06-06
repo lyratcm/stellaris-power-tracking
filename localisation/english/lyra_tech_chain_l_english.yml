@@ -22,7 +22,7 @@
 ####    situation    #######################################################################
  delta_to_tech: "Distance to highest tech"
  delta_to_tech_type: "Distance to tech leader"
- delta_to_tech_desc: "Research output: \n §B1st [event_target:lyra_true_tech1_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech1_max.GetName] \n §B2nd [event_target:lyra_true_tech2_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech2_max.GetName] \n §B3rd [event_target:lyra_true_tech3_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech3_max.GetName] \n §B4th [event_target:lyra_true_tech4_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech4_max.GetName] \n §B5th [event_target:lyra_true_tech5_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech5_max.GetName]"
+ delta_to_tech_desc: "Research output: \n §B1st $lyra_true_tech1_max$§! by the [event_target:lyra_true_tech1_max.GetName] \n §B2nd [event_target:lyra_true_tech2_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech2_max.GetName] \n §B3rd [event_target:lyra_true_tech3_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech3_max.GetName] \n §B4th [event_target:lyra_true_tech4_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech4_max.GetName] \n §B5th [event_target:lyra_true_tech5_max.lyra_true_tech_text]§! by the [event_target:lyra_true_tech5_max.GetName]"
  delta_to_tradition: "Distance to highest unity output"
  delta_to_tradition_type: "Distance to unity leader"
  delta_to_tradition_desc: "Unity output: \n §B1st [event_target:lyra_true_tradition1_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition1_max.GetName] \n §B2nd [event_target:lyra_true_tradition2_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition2_max.GetName] \n §B3rd [event_target:lyra_true_tradition3_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition3_max.GetName] \n §B4th [event_target:lyra_true_tradition4_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition4_max.GetName]\n §B5th [event_target:lyra_true_tradition5_max.lyra_true_tradition_text]§! by the [event_target:lyra_true_tradition5_max.GetName]"
@@ -32,8 +32,15 @@
  delta_to_pops: "Distance to highest number of pops"
  delta_to_pops_type: "Distance to pop leader"
  delta_to_pops_desc: "Pop count: \n §B1st [event_target:lyra_true_pops1_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops1_max.GetName] \n §B2nd [event_target:lyra_true_pops2_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops2_max.GetName] \n §B3rd [event_target:lyra_true_pops3_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops3_max.GetName] \n §B4rd [event_target:lyra_true_pops4_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops4_max.GetName] \n §B5th [event_target:lyra_true_pops5_max.lyra_true_pops_text]§! by the [event_target:lyra_true_pops5_max.GetName]"
+ delta_to_capital_owned: "Distance to highest number of own capitals"
+ delta_to_capital_desc: "Capitals count: \n §B1st [event_target:lyra_supremacy_capital_count1_max.lyra_supremacy_capital_count_text]§! by the [event_target:lyra_supremacy_capital_count1_max.GetName] \n §B2nd [event_target:lyra_supremacy_capital_count2_max.lyra_supremacy_capital_count_text]§! by the [event_target:lyra_supremacy_capital_count2_max.GetName] \n §B3rd [event_target:lyra_supremacy_capital_count3_max.lyra_supremacy_capital_count_text]§! by the [event_target:lyra_supremacy_capital_count3_max.GetName] \n §B4rd [event_target:lyra_supremacy_capital_count4_max.lyra_supremacy_capital_count_text]§! by the [event_target:lyra_supremacy_capital_count4_max.GetName] \n §B5th [event_target:lyra_supremacy_capital_count5_max.lyra_supremacy_capital_count_text]§! by the [event_target:lyra_supremacy_capital_count5_max.GetName]"
+ #attemp at rounding on loc
+ lyra_true_tech1_max: "[event_target:lyra_true_tech1_max.lyra_true_tech_text]"
+ delta_to_tech_score: "Progress gain from score"
+ delta_to_tech_progress: "Progress reduced on already having progress"
 
- omni_to_leader:0 "" 
+
+ omni_to_leader:0 "to_do"
  lyra_true_tech.10.title: "Configure delta to leader situations"
  lyra_true_tech.10.1: "Start situation for distance to tech leader"
  lyra_true_tech.10.11: "end situation for distance to tech leader"
@@ -53,6 +60,10 @@
  delta_to_pops_monthly_change_tooltip:0 "REPLACE_ME"
  lyra_true_tech.10.999:0 "Switch tracking to gross output"
  lyra_true_tech.10.9991:0 "Switch tracking to net output"
+ lyra_true_tech.10.9999: "Add upkeep for being ahead of 5th in each category"
+ lyra_true_tech.10.99991: "Remove upkeep for being ahead of 5th in each category"
+ lyra_true_tech.10.0: "Add all tracking situations"
+ lyra_true_tech.10.01: "Remove all tracking situations"
 
 
 ####    aio locs    #########################################################################################################################
@@ -62,3 +73,5 @@
 
  actual_tech_host_chain_desc:0 "[owner.actual_tech_host_chain_desc_type]"
  actual_tech_chain_desc:0 "[owner.actual_tech_chain_desc_type]"
+ spt_default: "Upkeep from being ahead of 5th in this category"
+ spt_top_upkeep: "Upkeep from being ahead of 5th in empire power"

@@ -1,4 +1,36 @@
 ordered_country_true_value = {
+	event_target:global_event_country = {
+		set_variable = {
+			which = spt_mid_game_years_passed_10_mult
+			value = trigger:mid_game_years_passed
+		}
+		# change_variable = {
+		# 	which = spt_mid_game_years_passed_10_mult
+		# 	value = -10
+		# }
+		if = {
+			limit = {
+				check_variable = {
+					which = spt_mid_game_years_passed_10_mult
+					value < 0
+				}
+			}
+			set_variable = {
+				which = spt_mid_game_years_passed_10_mult
+				value = 0
+			}
+		}
+		else = {
+			divide_variable = {
+				which = spt_mid_game_years_passed_10_mult
+				value = 10
+			}
+			change_variable = {
+				which = spt_mid_game_years_passed_10_mult
+				value = 1
+			}
+		}
+	}
 	ordered_country = {
 		limit = {
 			or = {
@@ -19,6 +51,25 @@ ordered_country_true_value = {
 		position = 0
 		order_by = $TYPE$$TRUE_VALUE$
 		save_global_event_target_as = lyra_$TRUE_VALUE$1_max
+		event_target:global_event_country = {
+			set_variable = { which = $TRUE_VALUE$_1_ahead value = prev.$TYPE$$TRUE_VALUE$ }
+			divide_variable = { which = $TRUE_VALUE$_1_ahead value = $TRUE_VALUE$_5_ahead_div }
+			subtract_variable = { which = $TRUE_VALUE$_1_ahead value = 1 }
+			if = { limit = { check_variable = { which = $TRUE_VALUE$_1_ahead value < 0 } } set_variable = { which = $TRUE_VALUE$_1_ahead value = 0 } }
+			multiply_variable = { which = $TRUE_VALUE$_1_ahead value = spt_mid_game_years_passed_10_mult }
+		}
+		# event_target:global_event_country = {
+		# 	set_variable = { which = true_tech_1_ahead value = prev.value:true_tech }
+		# 	divide_variable = { which = true_tech_1_ahead value = true_tech_5_ahead_div }
+		# 	multiply_variable = { which = true_tech_1_ahead value = spt_mid_game_years_passed_10_mult }
+		# }
+		#in hindsight scoping to global event isn't needed but could be useful later
+		every_situation = {
+			limit = {
+				has_situation_flag = $TRUE_VALUE$
+			}
+			set_variable = { which = spt_upkeep value = event_target:global_event_country.$TRUE_VALUE$_1_ahead }
+		}
 	}
 	ordered_country = {
 		limit = {
@@ -40,6 +91,19 @@ ordered_country_true_value = {
 		position = 1
 		order_by = $TYPE$$TRUE_VALUE$
 		save_global_event_target_as = lyra_$TRUE_VALUE$2_max
+		event_target:global_event_country = {
+			set_variable = { which = $TRUE_VALUE$_2_ahead value = prev.$TYPE$$TRUE_VALUE$ }
+			divide_variable = { which = $TRUE_VALUE$_2_ahead value = $TRUE_VALUE$_5_ahead_div }
+			subtract_variable = { which = $TRUE_VALUE$_2_ahead value = 1 }
+			if = { limit = { check_variable = { which = $TRUE_VALUE$_2_ahead value < 0 } } set_variable = { which = $TRUE_VALUE$_2_ahead value = 0 } }
+			multiply_variable = { which = $TRUE_VALUE$_2_ahead value = spt_mid_game_years_passed_10_mult }
+		}
+		every_situation = {
+			limit = {
+				has_situation_flag = $TRUE_VALUE$
+			}
+			set_variable = { which = spt_upkeep value = event_target:global_event_country.$TRUE_VALUE$_2_ahead }
+		}
 	}
 	ordered_country = {
 		limit = {
@@ -60,6 +124,19 @@ ordered_country_true_value = {
 		position = 2
 		order_by = $TYPE$$TRUE_VALUE$
 		save_global_event_target_as = lyra_$TRUE_VALUE$3_max
+		event_target:global_event_country = {
+			set_variable = { which = $TRUE_VALUE$_3_ahead value = prev.$TYPE$$TRUE_VALUE$}
+			divide_variable = { which = $TRUE_VALUE$_3_ahead value = $TRUE_VALUE$_5_ahead_div }
+			subtract_variable = { which = $TRUE_VALUE$_3_ahead value = 1 }
+			if = { limit = { check_variable = { which = $TRUE_VALUE$_3_ahead value < 0 } } set_variable = { which = $TRUE_VALUE$_3_ahead value = 0 } }
+			multiply_variable = { which = $TRUE_VALUE$_3_ahead value = spt_mid_game_years_passed_10_mult }
+		}
+		every_situation = {
+			limit = {
+				has_situation_flag = $TRUE_VALUE$
+			}
+			set_variable = { which = spt_upkeep value = event_target:global_event_country.$TRUE_VALUE$_3_ahead }
+		}
 	}
 	ordered_country = {
 		limit = {
@@ -80,6 +157,26 @@ ordered_country_true_value = {
 		position = 3
 		order_by = $TYPE$$TRUE_VALUE$
 		save_global_event_target_as = lyra_$TRUE_VALUE$4_max
+		event_target:global_event_country = {
+			set_variable = { which = $TRUE_VALUE$_4_ahead value = prev.$TYPE$$TRUE_VALUE$ }
+			divide_variable = { which = $TRUE_VALUE$_4_ahead value = $TRUE_VALUE$_5_ahead_div }
+			subtract_variable = { which = $TRUE_VALUE$_4_ahead value = 1 }
+			if = { limit = { check_variable = { which = $TRUE_VALUE$_4_ahead value < 0 } } set_variable = { which = $TRUE_VALUE$_4_ahead value = 0 } }
+			multiply_variable = { which = $TRUE_VALUE$_4_ahead value = spt_mid_game_years_passed_10_mult }
+		}
+		# event_target:global_event_country = {
+		# 	set_variable = { which = true_pops_4_ahead value = prev.value:true_pops }
+		# 	divide_variable = { which = true_pops_4_ahead value = true_pops_5_ahead_div }
+		# 	subtract_variable = { which = true_pops_4_ahead value = 1 }
+		# 	multiply_variable = { which = true_pops_4_ahead value = spt_mid_game_years_passed_10_mult }
+		# 	set_variable = { which = true_pops_4_ahead value = true_pops_4_ahead }
+		# }
+		every_situation = {
+			limit = {
+				has_situation_flag = $TRUE_VALUE$
+			}
+			set_variable = { which = spt_upkeep value = event_target:global_event_country.$TRUE_VALUE$_4_ahead }
+		}
 	}
 	ordered_country = {
 		limit = {
@@ -99,6 +196,20 @@ ordered_country_true_value = {
 		position = 4
 		order_by = $TYPE$$TRUE_VALUE$
 		save_global_event_target_as = lyra_$TRUE_VALUE$5_max
+		event_target:global_event_country = {
+			set_variable = { which = $TRUE_VALUE$_5_ahead value = prev.$TYPE$$TRUE_VALUE$ }
+			set_variable = { which = $TRUE_VALUE$_5_ahead_div value = $TRUE_VALUE$_5_ahead }
+			divide_variable = { which = $TRUE_VALUE$_5_ahead value = $TRUE_VALUE$_5_ahead_div }
+			subtract_variable = { which = $TRUE_VALUE$_5_ahead value = 1 }
+			if = { limit = { check_variable = { which = $TRUE_VALUE$_5_ahead value < 0 } } set_variable = { which = $TRUE_VALUE$_5_ahead value = 0 } }
+			multiply_variable = { which = $TRUE_VALUE$_5_ahead value = spt_mid_game_years_passed_10_mult }
+		}
+		every_situation = {
+			limit = {
+				has_situation_flag = $TRUE_VALUE$
+			}
+			set_variable = { which = spt_upkeep value = event_target:global_event_country.$TRUE_VALUE$_5_ahead }
+		}
 	}
 }
 
@@ -106,30 +217,43 @@ set_situation_true_omni = {
     start_situation = {
         type = delta_to_omni
         target = owner
-    }
-    every_situation = {
-        limit = { 
-			is_situation_type = delta_to_omni
-			not = {
-				has_situation_flag = tracker_set
-			}
+		effect = {
+			set_situation_flag = $TYPE$
 		}
-		#identifies each seperate instance
-		set_situation_flag = $TYPE$
-		set_situation_flag = tracker_set
-        prev = {
-            set_variable = { which = delta_to_$TYPE$_progress value = prev.trigger:situation_progress }
-        }
     }
+	set_country_flag = $TYPE$
+    # every_situation = {
+    #     limit = {
+	# 		is_situation_type = delta_to_omni
+	# 		not = {
+	# 			has_situation_flag = tracker_set
+	# 		}
+	# 	}
+	# 	#identifies each seperate instance
+	# 	set_situation_flag = $TYPE$
+	# 	set_situation_flag = tracker_set
+    # }
 }
 
 clear_situation_true_omni = {
     every_situation = {
         limit = {
             is_situation_type = delta_to_omni
-			has_situation_flag = $TYPE$
+			has_situation_flag = true_tech
         }
         destroy_situation = this
     }
-    clear_variable = delta_to_$TYPE$_progress
+	if = {
+		limit = {
+			is_variable_set = delta_to_$TYPE$_progress
+		}
+		clear_variable = delta_to_$TYPE$_progress
+	}
+	if = {
+		limit = {
+			has_country_flag = $TYPE$
+		}
+		remove_country_flag = $TYPE$
+	}
+
 }
